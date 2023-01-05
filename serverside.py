@@ -15,8 +15,12 @@ def receive_covert_packet(sock, fragment_size=1480):
             break
     return data
 
+# Read the IP address to listen on and the port number from the user
+listen_ip = input("Enter the IP address to listen on: ")
+port = int(input("Enter the port number: "))
+
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_IP)
-server_socket.bind(('0.0.0.0', 0))
+server_socket.bind((listen_ip, port))
 
 data = receive_covert_packet(server_socket)
 print(data.decode('utf-8'))
